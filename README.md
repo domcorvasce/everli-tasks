@@ -4,13 +4,16 @@
 
 ## Task 1
 
+[Check out solution](reverse_binary/reverse_binary.js)
+
 **Language:** JavaScript
 
 Write a function for reversing numbers in binary. For instance, the binary representation of 13 is 1101, and reversing it gives 1011, which corresponds to number 11.
 
-[Check out solution](reverse_binary/reverse_binary.js)
 
 ## Task 2
+
+[Check out solution](change_directory/change_directory.php)
 
 **Language:** PHP
 
