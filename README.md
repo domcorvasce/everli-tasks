@@ -39,6 +39,10 @@ echo $path->currentPath; //=> '/a/b/c/x'.
 
 ## Task 3
 
+**Requirement:** `pip3 install haversine`
+
+[Check out solution](haversine_coverage/haversine_coverage.py)
+
 **Language:** Python
 
 Suppose you have:
