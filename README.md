@@ -1,12 +1,27 @@
 # Solutions to Everli's technical tasks
 
-## How to run
+## Installation
+
+Clone this repository:
+
+```shell
+git clone git@github.com:domcorvasce/everli-tasks
+cd everli-tasks
+```
+
+Install the required dependencies for the third task:
+
+```
+pip3 install -r requirements.txt
+```
 
 ## Task 1
 
 [Check out solution](reverse_binary/reverse_binary.js)
 
 **Language:** JavaScript
+
+**Tested on:** Node.js v14.18.0
 
 Write a function for reversing numbers in binary. For instance, the binary representation of 13 is 1101, and reversing it gives 1011, which corresponds to number 11.
 
@@ -16,6 +31,8 @@ Write a function for reversing numbers in binary. For instance, the binary repre
 [Check out solution](change_directory/change_directory.php)
 
 **Language:** PHP
+
+**Tested on:** PHP 7.4.27
 
 Write a function that provides change directory (`cd`) function for an abstract file system.
 
@@ -44,6 +61,8 @@ echo $path->currentPath; //=> '/a/b/c/x'.
 [Check out solution](haversine_coverage/haversine_coverage.py)
 
 **Language:** Python
+
+**Tested on:** Python 3.9.9
 
 Suppose you have:
 - a `haversine(lat1, lng1, lat2, lng2)` function that returns the distance (measured in km) between the coordinates of two given geographic point (`lat` and `lng` are latitude and longitude)
