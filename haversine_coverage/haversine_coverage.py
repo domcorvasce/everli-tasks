@@ -18,21 +18,36 @@ def compute_coverage(locations: List[object], shoppers: List[object]) -> List[ob
 
     coverages = []
     num_locations = len(locations)
-    enabled_shoppers = filter(lambda shopper: shopper["enabled"], shoppers)
+    enabled_shoppers = [shopper for shopper in shoppers if shopper["enabled"]]
+
+    # Extract latitude and longitude of each location once, instead of doing it
+    # multiple times when iterating over each *enabled* shopper
+    locations_coords = [(location["lat"], location["lng"]) for location in locations]
+
+    # NOTE: This is totally unnecessary for this task, but in a real-world scenario
+    # it would allow us to reuse the coverage for shoppers who share the same location
+    coverage_cache = {}
 
     for shopper in enabled_shoppers:
-        locations_covered = 0
         shopper_coords = (shopper["lat"], shopper["lng"])
-        shopper_result_obj = {"shopper_id": shopper["id"], "coverage": 0}
+        shopper_coverage = {"shopper_id": shopper["id"], "coverage": 0}
 
-        for location in locations:
-            location_coords = (location["lat"], location["lng"])
+        # If the shopper shares the same location of another shopper whose zone coverage
+        # has already been computed, then we don't need to compute che coverage manually
+        if not coverage_cache.get(shopper_coords) is None:
+            shopper_coverage["coverage"] = coverage_cache[shopper_coords]
+            coverages.append(shopper_coverage)
+            next
 
-            if haversine(shopper_coords, location_coords) < MAX_DISTANCE:
-                locations_covered += 1
+        covered_locations = 0
 
-        shopper_result_obj["coverage"] = (locations_covered / num_locations) * 100
-        coverages.append(shopper_result_obj)
+        for location in locations_coords:
+            if haversine(shopper_coords, location) < MAX_DISTANCE:
+                covered_locations += 1
+
+        shopper_coverage["coverage"] = (covered_locations / num_locations) * 100
+        coverages.append(shopper_coverage)
+        coverage_cache[shopper_coords] = shopper_coverage["coverage"]
 
     return sorted(coverages, key=lambda x: x["coverage"], reverse=True)
 
